@@ -34,6 +34,7 @@ const routes = [
         name: 'ThankYou',
         component:ThankYou
       },
+      
 ]
 
 const router = new VueRouter({

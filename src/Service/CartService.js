@@ -32,7 +32,7 @@ class cartService {
   }
   updateCart(cartId, quantity, totalPrice) {
     return axios.put(
-      `${EMPLOYEE_API_BASE_URL}/updateCartItems/${cartId}/${quantity}/${totalPrice}`
+      `${EMPLOYEE_API_BASE_URL}/update/${cartId}/${quantity}/${totalPrice}`
     );
   }
 }

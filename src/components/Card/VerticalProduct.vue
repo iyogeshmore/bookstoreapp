@@ -2,8 +2,8 @@
   <v-card outlined class="mt-10">
     <v-img :src="product.profilePic" width="250 " height="200px" contain />
     <v-card-title>{{ product.bookName }}</v-card-title>
-    <v-card-subtitle>${{ product.price }}</v-card-subtitle>
     <v-card-subtitle>author: {{ product.authorName }}</v-card-subtitle>
+    <v-card-subtitle>${{ product.price }}</v-card-subtitle>
     <v-card-actions>
       <template>
         <div class="text-center ma-2">
@@ -52,6 +52,8 @@ export default {
           console.log(response);
           console.log(response.data.data);
           this.CartItems = response.data.data;
+          console.log(this.CartItems);
+          location.reload();
         })
         .catch((error) => {
           console.log(error);

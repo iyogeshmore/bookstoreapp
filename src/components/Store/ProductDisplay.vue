@@ -1,24 +1,33 @@
 <template>
-
   <v-container mb-12>
-    <v-container fluid>
-      <v-row align="center">
-        <v-col class="d-flex" elevation="6" outlined cols="6" sm="12">
-          <v-select :items="items" filled label="Sort By"></v-select>
-        </v-col>
-      </v-row>
-    </v-container>
     <center>
       <v-row>
         <v-col sm="10" offset-sm="1" lg="8" offset-lg="2">
-          <h2> Books </h2> <br>
+          <h2> Books</h2><br>
           <center>
-            <v-btn @click="sortBookByName()" elevation="6" outlined>Sort by Book Name</v-btn>
-            &nbsp &nbsp
-            <v-btn @click="sortByLowToHighPrice()" elevation="6" outlined>Book Price Low to High</v-btn>
-            &nbsp &nbsp
-            <v-btn @click="sortByHighToLowPrice()" elevation="6" outlined>Book Price High to Low</v-btn>
-            &nbsp &nbsp
+            <v-spacer></v-spacer>
+            <div class="text-center">
+              <v-menu>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn v-bind="attrs" v-on="on">
+                    <v-icon small left>mdi-filter</v-icon>
+                    Filter
+                  </v-btn>
+                </template>
+                <v-list>
+                  <P> Available Books: {{ count }}</P>
+                  <v-list-item @click="sortBookByName">
+                    <v-list-item-title>Book Name</v-list-item-title>
+                  </v-list-item>
+                  <v-list-item @click="sortByLowToHighPrice">
+                    <v-list-item-title>Price Low to High</v-list-item-title>
+                  </v-list-item>
+                  <v-list-item @click="sortByHighToLowPrice">
+                    <v-list-item-title>Price High to Low</v-list-item-title>
+                  </v-list-item>
+                </v-list>
+              </v-menu>
+            </div>
           </center>
         </v-col>
       </v-row>
@@ -46,11 +55,9 @@ export default {
   data() {
     return {
       bookData: [],
+      count: [],
       snackbar: false,
       text: `Item added cart sucesfully!!`,
-      items: ['Book Name',
-        'Low To High Price',
-        'High To Low Price'],
     };
   },
   methods: {
@@ -79,6 +86,8 @@ export default {
       BookService.getAllBooks().then((response) => {
         console.log(response.data.data);
         this.bookData = response.data.data;
+        this.count = response.data.data.length;
+        console.log(this.count);
         this.displayMessage();
       });
     },
